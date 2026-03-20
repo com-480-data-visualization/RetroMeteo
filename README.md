@@ -43,6 +43,15 @@ The tool is designed for curious citizens and educators in Switzerland who want 
 
 After combining in R the datasets of the 12 swiss weather stations, we have a dataset with the following basic statistics by variables: 
 
+![image1](https://github.com/com-480-data-visualization/RetroMeteo/blob/master/images/basic_stats.png)
+
+All the weather stations didn’t always have the same measurements available, which explains the large quantity of NA’s for a lot of precise measurements. In total, after the merging, we have 412256 data points\! Of course, not all will be relevant for our analysis, but the main measurements, such as temperature, sunshine, wind or NO concentration will be the variables on which we’ll focus our visualisations.
+
+Our initial Exploratory Data Analysis focuses on seeing whether or not some metrics follow a trend across the last 30 to 45 years. The following plots explore this idea really basically, taking only the measurements from the Aigle station:
+
+![image2](https://github.com/com-480-data-visualization/RetroMeteo/blob/master/images/temp_over_years.png)
+![image3](https://github.com/com-480-data-visualization/RetroMeteo/blob/master/images/temp_evo_different_months.png)
+![image4](https://github.com/com-480-data-visualization/RetroMeteo/blob/master/images/precipitation_over_years.png)
 
 ### Related work
 
