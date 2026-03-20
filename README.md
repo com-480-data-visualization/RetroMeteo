@@ -48,10 +48,10 @@ After combining in R the datasets of the 12 swiss weather stations, we have a da
 
 
 Inspiration:
-Our primary visual benchmark is the MeteoSwiss mobile application and web portal. While MeteoSwiss excels at real-time forecasting, our approach shifts the focus toward historical storytelling.
-Long-term global temperature trends, such as those presented by Climate.gov which highlight changes in average surface temperature.
-Interactive climate maps from OpenClimateMap, enabling exploration of historical variations across regions.
-Real-time weather visualizations from OpenWeatherMap.
+* Our primary visual benchmark is the MeteoSwiss mobile application and web portal. While MeteoSwiss excels at real-time forecasting, our approach shifts the focus toward historical storytelling.
+* Long-term global temperature trends, such as those presented by [Climate.gov](https://www.climate.gov/news-features/understanding-climate/climate-change-global-temperature) which highlight changes in average surface temperature.
+* Interactive climate maps from [OpenClimateMap](https://openclimatemap.org), enabling exploration of historical variations across regions.
+* Real-time weather visualizations from [OpenWeatherMap](https://openweathermap.org/weathermap).
 
 Originality:
 Most existing Swiss weather tools are either focused on the now (forecasts) or are dense, non-interactive scientific reports. Our project bridges this gap by introducing an interactive tool to study the trends related to diverse weather measurements across the last 30 to 40 years.
