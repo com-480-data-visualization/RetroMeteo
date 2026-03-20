@@ -19,28 +19,44 @@ Please, fill the following sections about your project.
 
 ### Dataset
 
-> Find a dataset (or multiple) that you will explore. Assess the quality of the data it contains and how much preprocessing / data-cleaning it will require before tackling visualization. We recommend using a standard dataset as this course is not about scraping nor data processing.
->
-> Hint: some good pointers for finding quality publicly available datasets ([Google dataset search](https://datasetsearch.research.google.com/), [Kaggle](https://www.kaggle.com/datasets), [OpenSwissData](https://opendata.swiss/en/), [SNAP](https://snap.stanford.edu/data/) and [FiveThirtyEight](https://data.fivethirtyeight.com/)).
+We have selected the ***"All measurement values for a station"*** dataset via the ***OpenSwissData STAC Browser***. This comprehensive archive aggregates high-resolution meteorological measurements from automatic weather stations across Switzerland spanning the last 30 years.
+
+Data Quality and Preprocessing:
+The dataset is highly structured and maintained by Federal authorities, ensuring high reliability. However, we anticipate a preprocessing phase to:
+
+Aggregate temporal data: Converting raw hourly/daily measurements into meaningful annual or seasonal trends.
+Handle Missing Values: Some stations lack some measurements because of the absence of some sensors.
+Station mapping: Visualizing station locations
+
 
 ### Problematic
 
-> Frame the general topic of your visualization and the main axis that you want to develop.
-> - What am I trying to show with my visualization?
-> - Think of an overview for the project, your motivation, and the target audience.
+Research Question: How has the Swiss climate landscape shifted over the last three decades, and which regions are most impacted by these changes?
+
+Project Overview & Motivation:
+Switzerland’s diverse topography makes it a unique laboratory for climate study. Our goal is to move beyond static charts by building an interactive spatio-temporal dashboard. We want to empower users to visualize the evolution of weather measurement across Switzerland through the last 30 to 45 years.
+
+Target Audience:
+The tool is designed for curious citizens and educators in Switzerland who want a data-driven localized perspective on climate change rather than global averages.
 
 ### Exploratory Data Analysis
 
-> Pre-processing of the data set you chose
-> - Show some basic statistics and get insights about the data
+After combining in R the datasets of the 12 swiss weather stations, we have a dataset with the following basic statistics by variables: 
+
 
 ### Related work
 
 
-> - What others have already done with the data?
-> - Why is your approach original?
-> - What source of inspiration do you take? Visualizations that you found on other websites or magazines (might be unrelated to your data).
-> - In case you are using a dataset that you have already explored in another context (ML or ADA course, semester project...), you are required to share the report of that work to outline the differences with the submission for this class.
+Inspiration:
+Our primary visual benchmark is the MeteoSwiss mobile application and web portal. While MeteoSwiss excels at real-time forecasting, our approach shifts the focus toward historical storytelling.
+Long-term global temperature trends, such as those presented by Climate.gov which highlight changes in average surface temperature.
+Interactive climate maps from OpenClimateMap, enabling exploration of historical variations across regions.
+Real-time weather visualizations from OpenWeatherMap.
+
+Originality:
+Most existing Swiss weather tools are either focused on the now (forecasts) or are dense, non-interactive scientific reports. Our project bridges this gap by introducing an interactive tool to study the trends related to diverse weather measurements across the last 30 to 40 years.
+
+
 
 ## Milestone 2 (17th April, 5pm)
 
