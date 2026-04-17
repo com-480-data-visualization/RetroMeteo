@@ -87,7 +87,7 @@ _Screen 3:_
 
 Here we are on the most important screen, the data screen\! After selecting the station and variable the user was interested in, he now has multiple ways of interacting with it to get insightful information. On the top left corner of screen 3, the name of the variable appears, with a (i) next to it. When clicking on this (i), information about the protocol to collect the data is displayed, along with some important facts to better understand how to interpret the values of the table. On the center of screen 3, the table of the asked station \+ variable is displayed. Over it, the time period of the table. Beneath, multiple ways to choose what length of time period interests the user, and when he wants to begin and end it. 
 
-![][image1]
+![image5](https://github.com/com-480-data-visualization/RetroMeteo/blob/master/images/milestone2_sketch.jpeg)
 
 **A few words about the project**
 
