@@ -113,10 +113,11 @@ Here are features to add to our project if time allows:
 * Multi-station comparison  
 * “Hall of Fame”, compilation of the most extreme days, months, years for each metrics
 
+These features would add depth to our project and give interesting insights to the user.  
+
 **Prototype link** 
 https://retrometeo.netlify.app
 
-These features would add depth to our project and give interesting insights to the user.  
 ## Milestone 3 (29th May, 5pm)
 
 **80% of the final grade**
