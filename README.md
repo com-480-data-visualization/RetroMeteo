@@ -73,7 +73,7 @@ Most existing Swiss weather tools are either focused on the now (forecasts) or a
 
 **Overview of the visualizations**  
    
-Let us guide you through the experience of *RetroMétéo* (or at least what we plan it to be\!). 
+Let us guide you through the experience of *RetroMeteo* (or at least what we plan it to be\!). 
 
 _Screen 1:_
 
@@ -113,6 +113,8 @@ Here are features to add to our project if time allows:
 * Multi-station comparison  
 * “Hall of Fame”, compilation of the most extreme days, months, years for each metrics
 
+**Prototype link** 
+https://retrometeo.netlify.app
 
 These features would add depth to our project and give interesting insights to the user.  
 ## Milestone 3 (29th May, 5pm)
