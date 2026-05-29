@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>RetroMeteo</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
+<link rel="stylesheet" href="style.css?v=datastory-1" />
+</head>
+
+<body>
+<div id="app">
+
+  <div id="main">
+    <div id="map-container">
+      <div id="map"></div>
+    </div>
+  </div>
+
+  <section id="story-panel" aria-live="polite">
+    <div class="story-topline">
+      <span class="story-badge">Story</span>
+      <span id="story-step-count">1 / 5</span>
+      <button id="story-explore" class="story-link" type="button">Explore</button>
+    </div>
+    <h2 id="story-title">Swiss climate memories</h2>
+    <p id="story-copy">Each marker is a weather station. Follow the short story, then use the map to explore the records yourself.</p>
+    <div id="story-progress" aria-hidden="true"></div>
+    <div class="story-actions">
+      <button id="story-prev" class="story-btn secondary" type="button">Back</button>
+      <button id="story-next" class="story-btn" type="button">Next</button>
+    </div>
+  </section>
+
+  <button id="story-reopen" class="story-reopen hidden" type="button" title="Open story" aria-label="Open story">Story</button>
+
+  <section id="hof-panel" class="hidden" aria-live="polite">
+    <div class="hof-topline">
+      <span class="hof-badge">Hall of Fame</span>
+      <span id="hof-step-count">1 / 6</span>
+      <button id="hof-close" class="story-link" type="button">Close</button>
+    </div>
+    <div id="hof-value-line" class="hof-value-line"></div>
+    <h2 id="hof-title">Loading records…</h2>
+    <p id="hof-copy"></p>
+    <div id="hof-progress" aria-hidden="true"></div>
+    <div class="story-actions">
+      <button id="hof-prev" class="story-btn secondary" type="button">Back</button>
+      <button id="hof-next" class="story-btn" type="button">Next</button>
+    </div>
+  </section>
+
+  <button id="hof-open" class="hof-open-btn" type="button" title="Open Hall of Fame" aria-label="Open Hall of Fame">Hall of Fame</button>
+
+  <div id="topbar">
+    <div class="logo" aria-hidden="true">
+      <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8 2 L8 14 M2 8 L14 8" stroke="white" stroke-width="2" stroke-linecap="round" />
+      </svg>
+    </div>
+    <div>
+      <h1>RetroMeteo</h1>
+      <div class="subtitle">Swiss climate memories, station by station</div>
+    </div>
+    <div class="spacer"></div>
+  </div>
+
+  <div id="sidebar">
+    <div class="sb-section">
+      <div class="sb-label">Selected station</div>
+      <div id="station-card">
+        <div id="st-placeholder" class="st-placeholder">Click a station on the map to explore historical climate trends.</div>
+        <div id="st-info" class="hidden">
+          <div class="st-name" id="st-name">-</div>
+          <div class="st-meta" id="st-meta">-</div>
+          <div class="station-badges">
+            <span id="temp-badge">Warming trend</span>
+            <span id="period-badge">Select data</span>
+          </div>
+        </div>
+        <div id="compare-controls" class="hidden">
+          <button id="compare-btn" class="compare-btn" type="button">+ Compare station</button>
+          <div id="compare-card" class="hidden">
+            <div class="compare-card-inner">
+              <div id="st-name-2" class="compare-name">-</div>
+              <div id="st-meta-2" class="compare-meta">-</div>
+            </div>
+            <button id="remove-compare-btn" class="remove-compare-btn" type="button" title="Remove">✕</button>
+          </div>
+          <div id="layout-switcher" class="hidden">
+            <button class="layout-btn active" data-layout="overlay" type="button">Overlay</button>
+            <button class="layout-btn" data-layout="split" type="button">Split</button>
+          </div>
+        </div>
+      </div>
+      <div id="data-status" class="hidden"></div>
+    </div>
+
+    <div class="sb-section">
+      <div class="sb-label">Variable</div>
+      <div class="metric-list" id="metric-list">
+        <div class="metric-pill active" data-metric="temp">
+          <span class="dot" style="background:#c0392b"></span>
+          Temperature
+          <span class="avail-dot" id="avail-temp"></span>
+          <span class="unit">°C</span>
+        </div>
+        <div class="metric-pill" data-metric="precip">
+          <span class="dot" style="background:#1a6fc4"></span>
+          Precipitation
+          <span class="avail-dot" id="avail-precip"></span>
+          <span class="unit">mm</span>
+        </div>
+        <div class="metric-pill" data-metric="wind">
+          <span class="dot" style="background:#2d7a4f"></span>
+          Wind speed
+          <span class="avail-dot" id="avail-wind"></span>
+          <span class="unit">m/s</span>
+        </div>
+        <div class="metric-pill" data-metric="sun">
+          <span class="dot" style="background:#b45309"></span>
+          Sunshine
+          <span class="avail-dot" id="avail-sun"></span>
+          <span class="unit">h</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sb-section">
+      <div class="sb-label">Resolution</div>
+      <div class="res-group" id="res-group">
+        <button class="res-btn active" type="button" data-res="y">Yearly</button>
+        <button class="res-btn" type="button" data-res="m">Monthly</button>
+      </div>
+    </div>
+
+    <div class="sb-section">
+      <div class="sb-label">Time range</div>
+      <div class="time-group" id="time-group">
+        <button class="time-btn active" type="button" data-range="max" data-years="0">Max</button>
+        <button class="time-btn" type="button" data-range="30y" data-years="30">30y</button>
+        <button class="time-btn" type="button" data-range="20y" data-years="20">20y</button>
+        <button class="time-btn" type="button" data-range="10y" data-years="10">10y</button>
+        <button class="time-btn" type="button" data-range="5y" data-years="5">5y</button>
+      </div>
+      <div class="time-nav" id="time-nav" style="display:none">
+        <button class="time-nav-btn" id="prev-period" type="button">‹</button>
+        <span class="time-nav-label" id="time-nav-label"></span>
+        <button class="time-nav-btn" id="next-period" type="button">›</button>
+      </div>
+      <div class="time-hint">Use shorter windows to inspect recent variability, or Max to see the long-term signal.</div>
+    </div>
+
+    <div class="sb-section sidebar-footer">
+      <div class="sb-label">Legend</div>
+      <div class="legend-row">
+        <div class="legend-line" style="background:var(--blue-mid)"></div>
+        <span>Mean or total</span>
+      </div>
+      <div class="legend-row">
+        <div class="legend-line dashed"></div>
+        <span>Linear trend</span>
+      </div>
+      <div class="source-note">
+        Source: automatic weather station measurements via opendata.swiss.
+      </div>
+    </div>
+  </div>
+
+  <div id="chart-panel">
+    <div id="chart-header">
+      <span id="chart-title">Select a station to view data</span>
+      <span id="chart-meta"></span>
+    </div>
+    <div id="year-scrubber" class="year-scrubber hidden">
+      <div class="year-scrubber-head">
+        <span>Selected year</span>
+        <strong id="active-year-label">2025</strong>
+      </div>
+      <input id="year-range" type="range" min="1982" max="2025" value="2025" step="1" />
+      <div class="year-scrubber-bounds">
+        <span id="year-min-label">1982</span>
+        <span id="year-max-label">2025</span>
+      </div>
+    </div>
+    <div id="chart-empty">Click on a station marker to load historical measurements</div>
+    <div id="chart-svg-wrap" class="hidden"></div>
+  </div>
+</div>
+
+<div id="records-drawer">
+  <div
+    id="records-handle"
+    role="button"
+    tabindex="0"
+    onclick="toggleDrawer()"
+    onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggleDrawer(); }"
+  >
+    <span class="rh-title">Records</span>
+    <div id="records-handle-pills" class="rh-pills">
+      <span class="rh-pill">
+        <span class="rh-pill-lbl">Select</span>
+        <span class="rh-pill-val">station</span>
+      </span>
+    </div>
+    <span class="rh-chevron">^</span>
+  </div>
+
+  <div id="records-body">
+    <div id="records-body-inner">
+      <div class="rec-section-title" id="records-section-title">Selected metric records</div>
+      <div id="records-grid" class="records-grid">
+        <div class="rec-loading">Select a station to view records.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script src="stations.js"></script>
+<script src="main.js?v=datastory-1"></script>
+<script src="charts.js?v=datastory-1"></script>
+<script src="map.js?v=datastory-1"></script>
+</body>
+</html>
