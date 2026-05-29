@@ -127,6 +127,9 @@ https://retrometeom3.netlify.app
 **ProcessBook link:**
 [ProcessBook](ProcessBook.pdf)
 
+**Video link:**
+
+
 ## Late policy
 
 - < 24h: 80% of the grade for the milestone
